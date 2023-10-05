@@ -1,19 +1,21 @@
 'use strict';
 
 
-import * as dgram from "dgram";
+import { createSocket as create_udp_socket } from "dgram";
 
 import error_message from "./invalid_data.mjs";
+
+
+const host = "127.0.0.1";
+const port = 12500;
 
 
 function sendUDP(str) {
     typeof(str) !== 'string' && error_message();
 
     const msg = Buffer.from(str);
-    const host = "127.0.0.1";
-    const port = 12000;
 
-    const client = dgram.createSocket('udp4');
+    const client = create_udp_socket('udp4');
     
     client.send(
         msg,
@@ -34,3 +36,4 @@ function sendUDP(str) {
 
 
 export default sendUDP;
+
